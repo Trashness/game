@@ -90,18 +90,6 @@ const tokensToFetch: Currency[] = [
     )
   ]
 
-
-
-/*  const contract = new web3.eth.Contract(tokenContract, walletsToFetch)
-
-  async function getBalance(walletsToFetch) {
-    const result = await contract.methods.balanceOf(walletsToFetch).call();
-    return result;
- }
- */
- 
-
-
   const web3 = new Web3();
     
 
@@ -120,13 +108,6 @@ const tokensToFetch: Currency[] = [
       )
     }
   
-   /* const contract: Contract = new web3!.eth.Contract(ERC20 as AbiItem[], tokenAddress ) as any
-  
-      async function getTokenBalance(walletsToFetch: any) {
-      const result = await contract.methods.balanceOf(balance).call();
-      return result
-    }    */
-
     const walletsBalance = async () => {
     const newData = new Map(walletsBalances)
 
