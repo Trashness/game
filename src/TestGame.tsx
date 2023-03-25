@@ -22,11 +22,12 @@ import AccountModal from "./components/AccountModal"
 import { useEthers } from '@usedapp/core'
 import Web3 from 'web3';
 
+    
 
 const TestGame = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {account, chainId} = useEthers()
-  const [walletsBalances, setWalletsBalances] = useState<Map<string, Currency[]>>(new Map())
+  const [walletsBalances] = useState<Map<string, Currency[]>>(new Map())
 
 /* const balance =  async (
     tokenAddress: any
@@ -90,14 +91,14 @@ const tokensToFetch: Currency[] = [
     )
   ]
 
-  const web3 = new Web3();
+    const web3 = new Web3();
     
-
-    const balance = async (tokensToFetch) => {
+    const walletsBalance = async () => {
       
       return await Promise.all(
         walletsToFetch.map ( wallet => tokensToFetch.map(async (token) => 
             {const contract: Contract = new web3!.eth.Contract(ERC20 as AbiItem[], token.address ) as any
+              console.log(Contract)
             
               const result = await contract.methods.balanceOf(wallet).call();
               return result 
@@ -106,24 +107,10 @@ const tokensToFetch: Currency[] = [
           ) 
         )
       )
+      
     }
   
-    const walletsBalance = async () => {
-    const newData = new Map(walletsBalances)
-
-    return await Promise.all(
-      walletsToFetch.map(async (wallet) => {
-        await balance({
-          account: wallet,
-          tokens: tokensToFetch,
-          web3: web3!
-        }).then(result => {
-          newData.set(wallet, result)
-        }).catch(err => console.error(err))
-      })
-    ).then(() => setWalletsBalances(newData))
-  }
- 
+    
 
 const sendTokens = async (
     tokenAddress: string | undefined, 
@@ -147,8 +134,7 @@ const sendTokens = async (
   
   useEffect(() => {
     if (web3 && web3.eth) walletsBalance()
-  }, // eslint-disable-next-line 
-  [web3])
+  }, [web3])
 
   const addToken = async () => {
     if (web3) {
