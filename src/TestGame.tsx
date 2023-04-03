@@ -19,7 +19,7 @@ import Theme from './components/theme'
 import { ChakraProvider, useDisclosure } from "@chakra-ui/react"
 import ConnectButton from 'src/components/ConnectButton'
 import AccountModal from "./components/AccountModal"
-import { useEthers } from '@usedapp/core'
+import { useEthers} from '@usedapp/core'
 import Web3 from 'web3';
   
 
@@ -93,6 +93,7 @@ const tokensToFetch: Currency[] = [
     /* @ts-ignore */
     const web3 = new Web3 (window.ethereum);
     web3.eth.handleRevert = true
+    
     
     const walletsBalance = async () => {
        
