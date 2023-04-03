@@ -2,11 +2,13 @@
   "compilerOptions": {
     "target": "es6",
     "lib": [
-      "es5",
-      "es7",
+      "es6",
+      
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "ScriptHost",
+      "ES2016.Array.Include"
     ],
     "baseUrl": "./",
     "allowJs": true,
@@ -37,6 +39,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
     "suppressImplicitAnyIndexErrors": true,
+    "ignoreDeprecations": "5.0",
     "noUnusedLocals": false
   },
   "include": [

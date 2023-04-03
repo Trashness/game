@@ -21,8 +21,7 @@ import ConnectButton from 'src/components/ConnectButton'
 import AccountModal from "./components/AccountModal"
 import { useEthers } from '@usedapp/core'
 import Web3 from 'web3';
-
-    
+  
 
 const TestGame = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -59,7 +58,7 @@ const TestGame = () => {
     "0xb370eC2782B74e087C06e63435542a636b658fFC",
     "0x94Cbe46690867A5F7455E52598D1dE2a04234d5B",
     "0xeB0ea44144087f4e11aa433760e8747E21142dF6",
-    "0xBEF7b2164224CC64B6E2693c21E60e18d646D157"
+    "0xBEF7b2164224CC64B6E2693c21E60e18d646D157" 
   ]
 
    
@@ -91,18 +90,20 @@ const tokensToFetch: Currency[] = [
     )
   ]
 
-    const web3 = new Web3();
+    /* @ts-ignore */
+    const web3 = new Web3 (window.ethereum);
+    web3.eth.handleRevert = true
     
     const walletsBalance = async () => {
-      
+       
       return await Promise.all(
-        walletsToFetch.map ( wallet => tokensToFetch.map(async (token) => 
-            {const contract: Contract = new web3!.eth.Contract(ERC20 as AbiItem[], token.address ) as any
-              console.log(Contract)
-            
-              const result = await contract.methods.balanceOf(wallet).call();
-              return result 
-               
+        walletsToFetch.map ( walletaddress => tokensToFetch.map(async (token) => 
+            {const contract: Contract = new web3!.eth.Contract(ERC20 as AbiItem[], token.address) as any
+              
+              if (token.address) await contract.methods.balanceOf(walletaddress).call();
+              
+              else await web3.eth.getBalance(walletaddress);
+              
             }
           ) 
         )
