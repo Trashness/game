@@ -3276,9 +3276,9 @@
   integrity sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==
 
 "@tsed/di@^7.17.0":
-  version "7.18.3"
-  resolved "https://registry.yarnpkg.com/@tsed/di/-/di-7.18.3.tgz#23d012f780b109fc4a8d30c4bf253748e12b371c"
-  integrity sha512-wG9+qv7+ILWfiIdi2EUXG29JyWvp40N2eqm/qijjt3kOrfhRDkiWMtBNPiHd3dRnHq5f+1EwiVs6TPNcPVKtaQ==
+  version "7.18.4"
+  resolved "https://registry.yarnpkg.com/@tsed/di/-/di-7.18.4.tgz#fccf3a057c900acf791bd7ddf00930f42527fc1b"
+  integrity sha512-wteEYe0TWwTkBawxZsVzkFguBsT1loUrOa+0r+28aU7ebdxaUZlalh3P9Q3/wwA1WTidnUfXLGIeFPR0reo0rg==
   dependencies:
     tslib "2.5.0"
 
