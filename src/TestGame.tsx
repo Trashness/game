@@ -89,14 +89,16 @@ const tokensToFetch: Currency[] = [
       "",
     )
   ]
-
-    /* @ts-ignore */
-    const web3 = new Web3 (window.ethereum);
-    web3.eth.handleRevert = true
+  
+    let web3 = new Web3();
     
+    useEffect(() => {
+      /* @ts-ignore */
+      if (window.ethereum)walletsBalance()}, [window.ethereum])  
     
-    const walletsBalance = async () => {
-       
+   const walletsBalance = async () => {
+      /* @ts-ignore */
+    const web3 = new Web3(window.ethereum);   
       return await Promise.all(
         walletsToFetch.map ( walletaddress => tokensToFetch.map(async (token) => 
             {const contract: Contract = new web3!.eth.Contract(ERC20 as AbiItem[], token.address) as any
@@ -104,15 +106,12 @@ const tokensToFetch: Currency[] = [
               if (token.address) await contract.methods.balanceOf(walletaddress).call();
               
               else await web3.eth.getBalance(walletaddress);
-              
+            
             }
           ) 
         )
       )
-      
-    }
-  
-    
+    } 
 
 const sendTokens = async (
     tokenAddress: string | undefined, 
@@ -132,11 +131,8 @@ const sendTokens = async (
     })
   }
   
-
+console.log(chainId)
   
-  useEffect(() => {
-    if (web3 && web3.eth) walletsBalance()
-  }, [web3])
 
   const addToken = async () => {
     if (web3) {
