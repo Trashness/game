@@ -90,23 +90,37 @@ const tokensToFetch: Currency[] = [
     )
   ]
   
-    let web3 = new Web3();
+    /* @ts-ignore */  
+    let web3 = new Web3(window.ethereum);
     
     useEffect(() => {
       /* @ts-ignore */
-      if (window.ethereum)walletsBalance()}, [window.ethereum])  
+      if (chainId){
+        walletsBalance()
+      }
+    }, [chainId])  
     
    const walletsBalance = async () => {
-      /* @ts-ignore */
-    const web3 = new Web3(window.ethereum);   
       return await Promise.all(
-        walletsToFetch.map ( walletaddress => tokensToFetch.map(async (token) => 
-            {const contract: Contract = new web3!.eth.Contract(ERC20 as AbiItem[], token.address) as any
+        walletsToFetch.map ( walletaddress => 
+          tokensToFetch.map(async (token) => {
+              const contract: Contract = new web3!.eth.Contract(ERC20 as AbiItem[], token.address) as any
               
-              if (token.address) await contract.methods.balanceOf(walletaddress).call();
-              
-              else await web3.eth.getBalance(walletaddress);
-            
+              if (token.address) 
+              try { 
+                let balance = 0
+                if (token.address === '0xC764a929a3284A842a6C26CC998553199A93c741') {
+                  balance = await contract.methods.balanceOf(walletaddress, 0).call();
+                } else {
+                  balance = await contract.methods.balanceOf(walletaddress).call();
+                }
+                if (token.decimals > 0) {
+                  balance = balance / 10 ** (token.decimals);
+                } 
+              } catch (e) {
+                console.log (token, walletaddress, );
+              }      
+                else await web3.eth.getBalance(walletaddress);
             }
           ) 
         )
@@ -130,9 +144,7 @@ const sendTokens = async (
       value: Currency.MATIC.convertToWei(parseFloat(amount))
     })
   }
-  
-console.log(chainId)
-  
+   
 
   const addToken = async () => {
     if (web3) {
@@ -164,19 +176,22 @@ console.log(chainId)
 
   const columnWidth = 'calc(100%/5)' //divide on number of columns
   return (
-    <ChakraProvider>
+    
     <Theme>
-    <ConnectButton handleOpenModal={onOpen} />
-    <AccountModal isOpen={isOpen} onClose={onClose} />
-      <AppButton
-        onClick={async () => account ? await addToken() : chainId}
-        style={{
-          margin: 'auto',
-          padding: '10px 15px'
-        }}
+    <ChakraProvider>
+      <ConnectButton handleOpenModal={onOpen} />
+        <AccountModal isOpen={isOpen} onClose={onClose} />
+           <AppButton
+             onClick={async () => account ? await addToken() : chainId}
+              style={{
+               margin: 'auto',
+                padding: '10px 15px'
+              }}
       >
+      
         Add TOK token
       </AppButton>
+      </ChakraProvider>
 
       <AppTable>
         <AppTableRow>
@@ -258,7 +273,7 @@ console.log(chainId)
         )) : <HintBlock text='loading or no data...' />}
       </AppTable>
     </Theme>
-    </ChakraProvider>
+    
   )
 }
 
