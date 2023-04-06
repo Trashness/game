@@ -1,8 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const AppTableHeaderCol = styled.div<{width?: string}>`
-display: flex;
-  
-`
+const AppTableHeaderCol = styled.div<{ width?: string }>`
+  display: flex;
+`;
 
 export default AppTableHeaderCol;

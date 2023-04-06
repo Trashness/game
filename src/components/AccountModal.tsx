@@ -1,37 +1,37 @@
 import {
-    Box,
-    Button,
-    Flex,
-    Link,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Text,
-  } from "@chakra-ui/react";
-  import { ExternalLinkIcon, CopyIcon } from "@chakra-ui/icons";
-  import { useEthers } from "@usedapp/core";
-  import Identicon from "./Identicon";
-  
-  type Props = {
-    isOpen: any;
-    onClose: any;
-  };
-  
-  export default function AccountModal({ isOpen, onClose }: Props) {
-    const { account, deactivate } = useEthers();
-  
-    function handleDeactivateAccount() {
-      deactivate();
-      onClose();
-    }
-  
-    return (
-      <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
-        <ModalOverlay />
+  Box,
+  Button,
+  Flex,
+  Link,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Text,
+} from "@chakra-ui/react";
+import { ExternalLinkIcon, CopyIcon } from "@chakra-ui/icons";
+import { useEthers } from "@usedapp/core";
+import Identicon from "./Identicon";
+
+type Props = {
+  isOpen: any;
+  onClose: any;
+};
+
+export default function AccountModal({ isOpen, onClose }: Props) {
+  const { account, deactivate } = useEthers();
+
+  function handleDeactivateAccount() {
+    deactivate();
+    onClose();
+  }
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
+      <ModalOverlay />
         <ModalContent
           background="gray.900"
           border="1px"
@@ -133,7 +133,7 @@ import {
               </Flex>
             </Box>
           </ModalBody>
-  
+
           <ModalFooter
             justifyContent="end"
             background="gray.700"
@@ -151,7 +151,6 @@ import {
             </Text>
           </ModalFooter>
         </ModalContent>
-      </Modal>
-    );
-  }
-  
+    </Modal>
+  );
+}

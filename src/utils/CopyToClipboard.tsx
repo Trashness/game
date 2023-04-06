@@ -1,5 +1,4 @@
-
-export const CopyToClipboard = (textToCopy:any) => {navigator.clipboard.writeText(textToCopy)
-    return CopyToClipboard
-}
-
+export const CopyToClipboard = (textToCopy: any) => {
+  navigator.clipboard.writeText(textToCopy);
+  return CopyToClipboard;
+};
