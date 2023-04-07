@@ -11,7 +11,7 @@ import AppTableRow from "src/components/table/AppTableRow";
 import AppTableCol from "src/components/table/AppTableCol";
 import HintBlock from "./components/HintBlock";
 import AppTableHeaderCol from "src/components/table/AppTableHeaderCol";
-import { CopyToClipboard } from "src/utils/CopyToClipboard";
+import { сopyToClipboard } from "src/utils/CopyToClipboard";
 import { Contract } from "web3-eth-contract";
 import ERC20 from "src/repository/source/ethereum/abi/ERC20.json";
 import { AbiItem } from "web3-utils";
@@ -126,7 +126,7 @@ const TestGame = () => {
                 balance = 0;
               }
             } else {
-              balance = web3.eth.getBalance(walletaddress) as unknown as number;
+              balance = await web3.eth.getBalance(walletaddress) as unknown as number;
             }
             let thisvalue = new BigNumber(balance);
             token.value = thisvalue;
@@ -227,7 +227,7 @@ const TestGame = () => {
                 <AppTableCol width={columnWidth}>
                   <>
                     {addressShortener(item, [6, 6])}
-                    <button onClick={CopyToClipboard(item)}></button>
+                    <button onClick={() => сopyToClipboard(item)}></button>
                   </>
                 </AppTableCol>
                 {walletsBalances.get(item)?.map((currency, ind) => (
