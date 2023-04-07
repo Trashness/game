@@ -97,7 +97,7 @@ const TestGame = () => {
 
   const walletsBalance = async () => {
     const newData = new Map(walletsBalances);
-    return await Promise.all(
+    await Promise.all(
       walletsToFetch.map((walletaddress) =>
         Promise.all(
           tokensToFetch.map(async (token) => {
@@ -123,7 +123,7 @@ const TestGame = () => {
                   balance = balance / 10 ** token.decimals;
                 }
               } catch (e) {
-                console.log(balance);
+                balance = 0;
               }
             } else {
               balance = web3.eth.getBalance(walletaddress) as unknown as number;
@@ -138,6 +138,7 @@ const TestGame = () => {
       )
     ).then(() => setWalletsBalances(newData));
   };
+  
 
   const sendTokens = async (
     tokenAddress: string | undefined,
@@ -163,7 +164,7 @@ const TestGame = () => {
         value: Currency.MATIC.convertToWei(parseFloat(amount)),
       });
   };
-
+  
   const addToken = async () => {
     if (web3) {
       await (web3.currentProvider as any).request(
