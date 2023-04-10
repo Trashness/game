@@ -194,7 +194,7 @@ const TestGame = () => {
 
   const columnWidth = "calc(100%/5)"; //divide on number of columns
   return (
-    <ChakraProvider>
+    
       <Theme>
         <ConnectButton handleOpenModal={onOpen} />
         <AccountModal isOpen={isOpen} onClose={onClose} />
@@ -287,7 +287,7 @@ const TestGame = () => {
           )}
         </AppTable>
       </Theme>
-    </ChakraProvider>
+    
   );
 };
 

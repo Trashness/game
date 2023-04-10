@@ -13,7 +13,7 @@ import { Directive, DirectiveParameters, PartInfo } from '../directive.js';
  * for CSSStyleDeclaration like `backgroundColor`.
  */
 export interface StyleInfo {
-    [name: string]: string | undefined | null;
+    [name: string]: string | number | undefined | null;
 }
 declare class StyleMapDirective extends Directive {
     _previousStyleProperties?: Set<string>;

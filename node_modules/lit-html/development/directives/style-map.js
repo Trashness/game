@@ -5,6 +5,11 @@
  */
 import { noChange } from '../lit-html.js';
 import { directive, Directive, PartType, } from '../directive.js';
+const important = 'important';
+// The leading space is important
+const importantFlag = ' !' + important;
+// How many characters to remove from a value, as a negative number
+const flagTrim = 0 - importantFlag.length;
 class StyleMapDirective extends Directive {
     constructor(partInfo) {
         var _a;
@@ -67,8 +72,11 @@ class StyleMapDirective extends Directive {
             const value = styleInfo[name];
             if (value != null) {
                 this._previousStyleProperties.add(name);
-                if (name.includes('-')) {
-                    style.setProperty(name, value);
+                const isImportant = typeof value === 'string' && value.endsWith(importantFlag);
+                if (name.includes('-') || isImportant) {
+                    style.setProperty(name, isImportant
+                        ? value.slice(0, flagTrim)
+                        : value, isImportant ? important : '');
                 }
                 else {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
