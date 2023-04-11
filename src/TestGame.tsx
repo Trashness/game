@@ -16,7 +16,7 @@ import { Contract } from "web3-eth-contract";
 import ERC20 from "src/repository/source/ethereum/abi/ERC20.json";
 import { AbiItem } from "web3-utils";
 import Theme from "./components/theme";
-import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import ConnectButton from "src/components/ConnectButton";
 import AccountModal from "./components/AccountModal";
 import { useEthers } from "@usedapp/core";
@@ -195,7 +195,7 @@ const TestGame = () => {
   const columnWidth = "calc(100%/5)"; //divide on number of columns
   return (
     
-      <Theme>
+      <Theme> 
         <ConnectButton handleOpenModal={onOpen} />
         <AccountModal isOpen={isOpen} onClose={onClose} />
         <AppButton
@@ -203,13 +203,14 @@ const TestGame = () => {
           style={{
             margin: "auto",
             padding: "10px 15px",
+            height: "48px",
           }}
         >
           Add TOK token
         </AppButton>
-
+          
         <AppTable>
-          <AppTableRow>
+          <AppTableRow> 
             <AppTableHeaderCol width={columnWidth}>Name</AppTableHeaderCol>
             <AppTableHeaderCol width={columnWidth}>Wallet</AppTableHeaderCol>
             {tokensToFetch.map((token, index) => (
@@ -217,7 +218,7 @@ const TestGame = () => {
                 {token.symbol} Amount
               </AppTableHeaderCol>
             ))}
-          </AppTableRow>
+          </AppTableRow> 
           {[...walletsBalances.keys()].length > 0 ? (
             walletsToFetch.map((item, index) => (
               <AppTableRow key={index}>

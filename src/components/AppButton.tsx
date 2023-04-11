@@ -1,26 +1,21 @@
 import styled from "styled-components";
 
 const AppButton = styled.button`
+  height: 26px;
+  cursor: pointer;
   border-width: 0px;
   font-size: 16px;
   -webkit-box-align: center;
-  align-items: center;
   -webkit-box-pack: center;
-  justify-content: center;
-  height: 48px;
-  border-radius: 16px;
-  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out 0s;
   color: rgb(47, 138, 245);
   background: rgb(25, 32, 48);
-  font-family: inherit;
-  line-height: inherit;
-  box-sizing: border-box;
-  writing-mode: horizontal-tb !important;
-  display: inline-block;
-  border-style: outset;
-  border-image: initial;
-  margin: auto;
-  padding: 10px 15px;
+  margin: 0;
+  padding: 1px 6px;
+  
+  
+  
 `;
 
 export { AppButton };
