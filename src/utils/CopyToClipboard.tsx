@@ -1,4 +1,3 @@
 export const сopyToClipboard = (textToCopy: any) => {
-  navigator.clipboard.writeText(textToCopy);
- 
+  return navigator.clipboard.writeText(textToCopy);
 };

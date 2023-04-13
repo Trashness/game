@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { AppButton } from "src/components/AppButton";
 import { AppInput } from "src/components/AppInput";
-import AppValue from "src/components/AppValue";
+import AppValue  from "src/components/AppValue";
 import { Currency } from "src/repository/entities/Currency";
 import { ChainType } from "src/servises/network/ChainType";
-import { addressShortener } from "src/utils/StringUtils";
 import BigNumber from "bignumber.js";
 import AppTable from "src/components/table/AppTable";
 import AppTableRow from "src/components/table/AppTableRow";
@@ -98,14 +97,15 @@ const TestGame = () => {
   const walletsBalance = async () => {
     const newData = new Map(walletsBalances);
     await Promise.all(
-      walletsToFetch.map((walletaddress) =>
-        Promise.all(
+      walletsToFetch.map(async (walletaddress) => 
+        await Promise.all(
           tokensToFetch.map(async (token) => {
             const contract: Contract = new web3!.eth.Contract(
               ERC20 as AbiItem[],
               token.address
             ) as any;
             let balance = 0;
+            let matic = 0;
             if (token.address) {
               try {
                 if (
@@ -115,22 +115,23 @@ const TestGame = () => {
                     .balanceOf(walletaddress, 0)
                     .call();
                 } else {
-                  balance = await contract.methods
+                  balance = await contract.methods // TOKENs
                     .balanceOf(walletaddress)
                     .call();
                 }
                 if (token.decimals > 0) {
-                  balance = balance / 10 ** token.decimals;
+                  balance = balance / 10 ** token.decimals; 
                 }
               } catch (e) {
                 balance = 0;
               }
             } else {
-              balance = await web3.eth.getBalance(walletaddress) as unknown as number;
+              matic = await web3.eth.getBalance(walletaddress) as unknown as number; // MATIC
+              balance = Math.round((matic / 10 ** token.decimals) *1000)/ 1000;
             }
             let thisvalue = new BigNumber(balance);
-            token.value = thisvalue;
-            return token;
+            const setCurrency = new Currency(token.symbol, token.decimals, thisvalue, token.chain, token.address, token.logo) 
+            return setCurrency
           })
         ).then((result) => {
           newData.set(walletaddress, result);
@@ -138,7 +139,6 @@ const TestGame = () => {
       )
     ).then(() => setWalletsBalances(newData));
   };
-  
 
   const sendTokens = async (
     tokenAddress: string | undefined,
@@ -226,23 +226,24 @@ const TestGame = () => {
                   {walletsNames.get(item)}
                 </AppTableCol>
                 <AppTableCol width={columnWidth}>
-                  <>
-                    {addressShortener(item, [6, 6])}
-                    <button onClick={() => сopyToClipboard(item)}></button>
-                  </>
+                  {item.slice(0, 6)}...{item.slice(item.length -6)}
+                  <AppButton onClick={() => сopyToClipboard(item)}>copy</AppButton>
+                  
                 </AppTableCol>
                 {walletsBalances.get(item)?.map((currency, ind) => (
                   <AppTableCol key={ind} width={columnWidth}>
                     <AppValue
-                      value={Currency.MATIC.convertFromWei(
+                      /*value={Currency.MATIC.convertFromWei(
                         currency.value.toString()
                       )}
-                      currency={currency}
                       chain={currency.chain}
                       roundingFloat
+                      {new BigNumber(currency.value.toString()).div(10 ** currency.decimals).toNumber().toFixed(3)}*/
                     >
+                      {currency.value.toString()}
                       &nbsp;{currency.symbol}
                     </AppValue>
+                    
                     <form
                       style={{
                         width: "auto",

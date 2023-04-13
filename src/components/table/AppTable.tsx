@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const AppTable = styled.div<{ width?: string }>`
-  display: flex;
   flex-direction: column;
   -webkit-box-align: center;
   align-items: center;
