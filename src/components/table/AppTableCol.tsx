@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 const AppTableCol = styled.div<{ width?: string }>`
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   padding: 10px;
   -webkit-box-pack: space-around;
