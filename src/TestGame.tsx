@@ -193,8 +193,14 @@ const TestGame = () => {
   };
 
   const columnWidth = "calc(100%/5)"; //divide on number of columns
-  return (
-    
+  if ((chainId) !== 137)
+    return (
+      <Theme>
+        Change network to polygon
+      </Theme>
+    );
+  else 
+    return (
       <Theme> 
         <ConnectButton handleOpenModal={onOpen} />
         <AccountModal isOpen={isOpen} onClose={onClose} />
@@ -289,8 +295,7 @@ const TestGame = () => {
           )}
         </AppTable>
       </Theme>
-    
-  );
-};
+    )
+  };
 
 export default TestGame
