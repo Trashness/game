@@ -3,6 +3,8 @@ import TestGame from "./TestGame";
 import { DAppProvider, DEFAULT_SUPPORTED_CHAINS } from "@usedapp/core";
 import { Polygon } from "src/servises/network/Polygon";
 import { ChakraProvider } from "@chakra-ui/provider";
+import { ColorModeScript } from "@chakra-ui/color-mode";
+import theme from "./components/ThemeChakra.tsx";
 
 (async () => {
   ReactDOM.render(
@@ -16,7 +18,8 @@ import { ChakraProvider } from "@chakra-ui/provider";
       }}
     >
       <ChakraProvider>
-      <TestGame />
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+          <TestGame />
       </ChakraProvider>
     </DAppProvider>,
     document.getElementById("root")
